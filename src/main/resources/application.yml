@@ -1,0 +1,5 @@
+spring:
+  data:
+    mongodb:
+      uri : mongodb+srv://ndeyehoudiasylla02:W75tJNqK0ICxj1ER@admin.cfz5v.mongodb.net/?retryWrites=true&w=majority&appName=admin
+      database : PatientDB

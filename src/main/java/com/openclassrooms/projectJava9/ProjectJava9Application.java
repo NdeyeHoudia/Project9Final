@@ -12,26 +12,33 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.util.Optional;
 
 @SpringBootApplication
-public class ProjectJava9Application implements CommandLineRunner {
+public class ProjectJava9Application {
 
-	private final Logger logger = LoggerFactory.getLogger(ProjectJava9Application.class);
+//	private final Logger logger = LoggerFactory.getLogger(ProjectJava9Application.class);
 
 
-	@Autowired
-	private PatientRepository patientRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjectJava9Application.class, args);
 	}
-
+/*
 	@Override
 	public void run(String... args) throws Exception {
-		Optional<Patient> patient = patientRepository.findById("66f2dfcf7dbb43d16f803347");
+	/*	Optional<Patient> patient = patientRepository.findById("66f2dfcf7dbb43d16f803347");
 			if(patient.isPresent()){
 				logger.info(patient.get().getId());
 			}else {
 				logger.info("Patient not found");
 			}
-	}
 
+
+		Patient patient = new Patient();
+		patient.setNom("test1");
+		patient.setPrenom("ada");
+		patient.setGenre("f");
+		patient.setAdresse("angers");
+		patient.setTelephone("77 77 77 77");
+		patientRepository.insert(patient);
+	}
+ */
 }
