@@ -4,8 +4,8 @@ import com.openclassrooms.project9_Microservice_MongoDB.project9_Microservice_Mo
 import com.openclassrooms.project9_Microservice_MongoDB.project9_Microservice_MongoDB.service.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -16,26 +16,36 @@ public class NoteController {
     private NoteService noteService;
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Note createNote(@RequestBody Note Note){
-        return noteService.addNote(Note);
+    public Note createNote(@RequestBody Note note,
+                           @RequestParam(value = "patientId", required = true) String patientId,
+                           @RequestParam String patient){
+        return noteService.saveNote(note,patientId,patient);
     }
 
     @GetMapping("/all")
-    public List<Note> getNote(){
-        return noteService.findAllNote();
+    public ResponseEntity<List<Note>>  getNote(){
+        return ResponseEntity.ok(noteService.findAllNote());
     }
 
-    @GetMapping("{NoteId}")
-    public Note getNote(@PathVariable String NoteId){
-        return noteService.getNoteById(NoteId);
+    @GetMapping("/noteId")
+    public Note getNote(@RequestParam String patient_id){
+        return noteService.getNoteById(patient_id);
     }
 
-    @PutMapping
-    public Note modifyNote(@RequestBody Note Note){
-      return noteService.updateNote(Note);
-    }
-   @DeleteMapping("/{NoteId}")
-    public String deleteNote(@PathVariable String NoteId){
-      return noteService.deleteNote(NoteId);
+   @PutMapping
+    public Note modifyNote(@RequestBody Note note){return noteService.updateNote(note);}
+   @DeleteMapping("/{noteId}")
+    public String deleteNote(@PathVariable String noteId){return noteService.deleteNote(noteId);}
+    @GetMapping("/countKeyWord")
+    public long wordKey(@RequestParam List<String> keywords){return noteService.countByNoteAndContentRegex22(keywords);}
+
+    @GetMapping("/patientNone")
+    public boolean none(@RequestParam Note  note){return noteService.patientNone(note);}
+
+    @GetMapping("/{id}/count-keyWord")
+    public int countKeywordsInNote(
+            @PathVariable String id,
+            @RequestParam String[] keywords) {
+        return noteService.countKeywordOccurrences(id, keywords);
     }
 }
