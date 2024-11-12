@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
+
 import java.util.List;
 
 @RestController
@@ -14,6 +16,15 @@ public class NoteController {
     
     @Autowired
     private NoteService noteService;
+
+    String url = "http://localhost:8084/patients/all";
+    RestTemplate restTemplate = new RestTemplate();
+    Object patients = restTemplate.getForObject(url, Object[].class);
+
+    @GetMapping("/listPatient")
+    public Object getPatient(){
+        return  patients;
+    }
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Note createNote(@RequestBody Note note,
@@ -39,13 +50,5 @@ public class NoteController {
     @GetMapping("/countKeyWord")
     public long wordKey(@RequestParam List<String> keywords){return noteService.countByNoteAndContentRegex22(keywords);}
 
-    @GetMapping("/patientNone")
-    public boolean none(@RequestParam Note  note){return noteService.patientNone(note);}
 
-    @GetMapping("/{id}/count-keyWord")
-    public int countKeywordsInNote(
-            @PathVariable String id,
-            @RequestParam String[] keywords) {
-        return noteService.countKeywordOccurrences(id, keywords);
-    }
 }

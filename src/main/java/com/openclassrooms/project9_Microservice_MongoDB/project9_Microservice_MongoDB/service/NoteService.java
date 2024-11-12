@@ -5,18 +5,22 @@ import com.openclassrooms.project9_Microservice_MongoDB.project9_Microservice_Mo
 import com.openclassrooms.project9_Microservice_MongoDB.project9_Microservice_MongoDB.repository.NoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.Year;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Optional;
-import java.util.TreeMap;
-import java.util.stream.Collectors;
 
 @Service
 public class NoteService {
 
     @Autowired
     private NoteRepository noteRepository;
+    String url = "http://localhost:8084/patients/all";
+    RestTemplate restTemplate = new RestTemplate();
+    Object patients = restTemplate.getForObject(url, Object[].class);
 
     // CRUD CREATE READ UPDATE DELETE
     public Note addNote(Note note) {
@@ -55,37 +59,8 @@ public class NoteService {
        return noteRepository.countByPatientIdAndContentRegex2(regex);
     }
 
-    // déterminer si le patient a le diabete
-
-    public boolean patientNone(Note note){
-
-        return !(note.getNote().contains(KeyWord.microalbumine) || note.getNote().contains(KeyWord.hemoglobine) ||
-                note.getNote().contains(KeyWord.taille) || note.getNote().contains(KeyWord.poids) ||
-                note.getNote().contains(KeyWord.fumeur) || note.getNote().contains(KeyWord.anormal) ||
-                note.getNote().contains(KeyWord.cholesterol) || note.getNote().contains(KeyWord.vertiges) ||
-                note.getNote().contains(KeyWord.rechute) || note.getNote().contains(KeyWord.reaction) ||
-                note.getNote().contains(KeyWord.anticorps) || note.getNote().contains(KeyWord.stress));
-    }
-
     // Compter les occurrences des mots-clés dans toutes les notes du patient
 
-    public int countKeywordOccurrences(String id, String[] keywords) {
-        // Récupérer la note par ID
-        List<Note> notes = noteRepository.findByIdPatient(id);
-        if (notes.isEmpty()) {
-            throw new IllegalArgumentException("Note not found with ID: " + id);
-        }
-// Compter les occurrences des mots-clés dans toutes les notes du patient
-        int totalOccurrences = 0;
-        for (Note note : notes) {
-            String content = note.getNote();
-            for (String keyword : keywords) {
-                String keywordLower = keyword.toLowerCase();
-                int keywordCount = content.split(keywordLower, -1).length - 1;
-                totalOccurrences += keywordCount;
-            }
-        }
-        return totalOccurrences;
-        // Compter les occurrences des mots-clés
-    }
+
+
 }
