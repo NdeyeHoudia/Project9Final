@@ -17,7 +17,7 @@ public class NoteController {
     @Autowired
     private NoteService noteService;
 
-    String url = "http://localhost:8084/patients/all";
+   /* String url = "http://localhost:8084/patients/all";
     RestTemplate restTemplate = new RestTemplate();
     Object patients = restTemplate.getForObject(url, Object[].class);
 
@@ -25,6 +25,7 @@ public class NoteController {
     public Object getPatient(){
         return  patients;
     }
+    */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Note createNote(@RequestBody Note note,

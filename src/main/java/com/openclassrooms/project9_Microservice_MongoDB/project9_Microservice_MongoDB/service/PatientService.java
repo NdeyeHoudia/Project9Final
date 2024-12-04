@@ -45,17 +45,6 @@ public class PatientService {
     }
 
     // déterminer si le patient a le diabete
-    public String patientZeroRisk(String note){
-
-        if(!(note.contains(KeyWord.microalbumine) || note.contains(KeyWord.hemoglobine) ||
-                note.contains(KeyWord.taille) || note.contains(KeyWord.poids) ||
-                note.contains(KeyWord.fumeur) || note.contains(KeyWord.anormal) ||
-                note.contains(KeyWord.cholesterol) || note.contains(KeyWord.vertiges) ||
-                note.contains(KeyWord.rechute) || note.contains(KeyWord.reaction) ||
-                note.contains(KeyWord.anticorps) || note.contains(KeyWord.stress))){
-            return "aucun risque";
-        }else return "le patient présente des risque";
-    }
 
     public List<PatientDTO> getPatientDTOS(){
         RestTemplate restTemplate = new RestTemplate();
@@ -96,21 +85,73 @@ public class PatientService {
         LocalDate dateNaissance = LocalDate.parse(dateDeNaissance(id), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         return Period.between(dateNaissance, LocalDate.now()).getYears();
     }
+    public String patientZeroRisk(String note){
+
+        if(!(note.contains(KeyWord.microalbumine) || note.contains(KeyWord.hemoglobine) ||
+                note.contains(KeyWord.taille) || note.contains(KeyWord.poids) ||
+                note.contains(KeyWord.fumeur) || note.contains(KeyWord.anormal) ||
+                note.contains(KeyWord.cholesterol) || note.contains(KeyWord.vertiges) ||
+                note.contains(KeyWord.rechute) || note.contains(KeyWord.reaction) ||
+                note.contains(KeyWord.anticorps) || note.contains(KeyWord.stress))){
+            return "aucun risque";
+        }else return "le patient présente des risque";
+    }
     public String patientBorderline(String idPatient, String[] keywords, String birthdate){
 
-        if(countKeywordOccurrences(idPatient, keywords) > 2 &&
-                countKeywordOccurrences(idPatient, keywords) <5 &&
-                agePatient(birthdate) >30){
+        if(countKeywordOccurrences(idPatient, keywords) > 2
+                && countKeywordOccurrences(idPatient, keywords) <5
+                && agePatient(birthdate) >30){
             return "risque limité";
         }else return " le patient présente beaucoup de risques";
     }
 
     public String patientDanger(String idPatient, String[] keywords,String birthdate){
-        if(Objects.equals(genre(birthdate), "F") && (agePatient(birthdate) < 30) && (countKeywordOccurrences(idPatient, keywords) == 3)){
+        if(Objects.equals(genre(birthdate), "F")
+                && (agePatient(birthdate) < 30)
+                && (countKeywordOccurrences(idPatient, keywords) == 3)){
             return "la patiente est en danger";
         }
-        else if(Objects.equals(genre(birthdate), "M") && (agePatient(birthdate) < 30) && (countKeywordOccurrences(idPatient, keywords) == 4)){
+        else if(Objects.equals(genre(birthdate), "M")
+                && (agePatient(birthdate) < 30)
+                && (countKeywordOccurrences(idPatient, keywords) == 4)){
             return "le patient est en danger";
         }else return "le patient n'est pas en dangers";
+    }
+    public String earlyOnset(String idPatient, String[] keywords,String birthdate) {
+        if (Objects.equals(genre(birthdate), "M")
+                && (agePatient(birthdate) < 30)
+                && (countKeywordOccurrences(idPatient, keywords) >= 5)) {
+            return "le patient présent d'apparition précoce";
+        } else if (Objects.equals(genre(birthdate), "F")
+                && (agePatient(birthdate) < 30)
+                && (countKeywordOccurrences(idPatient, keywords) >= 7)) {
+            return "la patient présente d'apparition précoce";
+        } else if ((agePatient(birthdate) > 30)
+                && (countKeywordOccurrences(idPatient, keywords) <= 8)) {
+            return "on constate une apparition précoce";
+        }else return "ancune apparition précoce" ;
+    }
+    public String statusNotePatient(String idPatient, String[] keywords,String birthdate){
+        if(Objects.equals(genre(birthdate), "F") && (agePatient(birthdate) < 30))
+        {
+                if((countKeywordOccurrences(idPatient, keywords) == 3)){
+                    return "la patiente est en danger";
+                } else if(countKeywordOccurrences(idPatient, keywords) >= 7){
+                    return "la patient présente une apparition précoce";
+                }
+        }else if(Objects.equals(genre(birthdate), "M") && (agePatient(birthdate) < 30)){
+                if(countKeywordOccurrences(idPatient, keywords) == 4){
+                    return "le patient est en danger";
+                } else if (countKeywordOccurrences(idPatient, keywords) >= 5) {
+                    return "le patient présent une apparition précoce";
+                }
+        }else if (agePatient(birthdate) > 30){
+                if(countKeywordOccurrences(idPatient, keywords) >= 8){
+                    return "on constate une apparition précoce";
+                } else if (countKeywordOccurrences(idPatient, keywords) > 2
+                        && countKeywordOccurrences(idPatient, keywords) <5) {
+                    return "risque limité";
+                }else return "aucun risque";
+        } return "ancune apparition précoce" ;
     }
 }

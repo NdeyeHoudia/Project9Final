@@ -23,6 +23,19 @@ public class PatientController {
     @GetMapping("/patientNone")
     public String none(@RequestParam String note){return patientService.patientZeroRisk(note);}
 
+    @GetMapping("/age-patient")
+    public int agePatient(@RequestParam String birthdate) {return patientService.agePatient(birthdate);
+    }
+
+    @GetMapping("/id-patient")
+    public PatientDTO getPatientDTO(@RequestParam String birthdate) {
+        return patientService.getPatientById(birthdate);
+    }
+
+    @GetMapping("/listPatient")
+    public List<PatientDTO> getAllPatient() {
+        return patientService.getPatientDTOS();
+    }
     @GetMapping("/{id}/borderline")
     public String borderline(@RequestParam String birthdate,
                              @PathVariable String id,
@@ -39,17 +52,22 @@ public class PatientController {
         return patientService.patientDanger(id,keywords,birthdate);
     }
 
-    @GetMapping("/age-patient")
-    public int agePatient(@RequestParam String birthdate) {return patientService.agePatient(birthdate);
+    @GetMapping("/{id}/early-onset")
+    public String earlyOnset(
+                         @PathVariable String id,
+                         @RequestParam String[] keywords,
+                         @RequestParam String birthdate
+    ) {
+        return patientService.earlyOnset(id,keywords,birthdate);
     }
 
-    @GetMapping("/id-patient")
-    public PatientDTO getPatientDTO(@RequestParam String birthdate) {
-        return patientService.getPatientById(birthdate);
+    @GetMapping("/{id}/status")
+    public String statusNotePatient(
+            @PathVariable String id,
+            @RequestParam String[] keywords,
+            @RequestParam String birthdate
+    ) {
+        return patientService.statusNotePatient(id,keywords,birthdate);
     }
 
-    @GetMapping("/listPatient")
-    public List<PatientDTO> getAllPatient() {
-        return patientService.getPatientDTOS();
-    }
 }
