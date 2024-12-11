@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+	<meta charset="utf-8" />
+	<title>Application Pay My Buddy</title>
+
+	<link rel="stylesheet"
+		  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+		  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+		  crossorigin="anonymous">
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+	<div class="row">
+		<div class="col-6 text-right">
+			Logged in user: <b th:inline="text"  class="user"> [[${remoteUser}]] </b>
+			<span sec:authorize="isAuthenticated()"><a th:href="@{/logout}" >Logout</a></span>   |
+			<a class="btn btn-danger btn-sm" href="../index">Cancel</a>
+		</div>
+	</div>
+	<div class="row"><h2>Patient List</h2></div>
+	<div class="row">
+		<a href="/patient/add" class="btn btn-primary btn-sm">Add New</a>
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>lastname</th>
+					<th>firstname</th>
+					<th>date_of_birth</th>
+					<th>genre</th>
+					<th>address</th>
+					<th>phone</th>
+					<th>action</th>
+
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="patient : ${patients}">
+					<td th:text="${patient.lastname}"></td>
+					<td th:text="${patient.firstname}"></td>
+					<td th:text="${patient.date_of_birth}"></td>
+					<td th:text="${patient.genre}"></td>
+					<td th:text="${patient.address}"></td>
+					<td th:text="${patient.phone}"></td>
+					<td style="width: 15%" class="text-center">
+						<a th:href="@{/patient/update/{id}(id=${patient.id})}">Edit</a>&nbsp;|&nbsp;
+						<a th:href="@{/patient/delete/{id}(id=${patient.id})}">Delete</a> |
+						<a th:href="@{/patient/history/{id}(id=${patient.id})}">Consult</a> |
+						<a th:href="@{/note/add/{id}(id=${patient.id})}">Add Notes</a>&nbsp;
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+</body>
+</html>

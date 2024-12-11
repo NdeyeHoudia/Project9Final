@@ -1,45 +1,63 @@
 package com.openclassrooms.projectJava9.service;
 
+import com.openclassrooms.projectJava9.model.NoteDTO;
 import com.openclassrooms.projectJava9.model.Patient;
 import com.openclassrooms.projectJava9.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
+import java.util.Optional;
 
 @Service
 public class PatientService {
 
-   @Autowired
+    @Autowired
     private PatientRepository patientRepository;
+    @Autowired
+    private NoteClient noteClient;
 
     // CRUD CREATE READ UPDATE DELETE
-    public Patient addPatient(Patient patient){
-        patient.setId(UUID.randomUUID().toString().split("-")[0]);
-       return patientRepository.save(patient);
+    public Patient addPatient(Patient patient) {
+        return patientRepository.save(patient);
     }
-    public List<Patient> findAllPatient(){
+
+    public List<Patient> findAllPatient() {
         return patientRepository.findAll();
     }
-    public Patient getPatientById(String id){
+
+    public Patient getPatientById(Integer id) {
         return patientRepository.findById(id).get();
     }
-    public Patient updatePatient(Patient patientRequest){
+
+    public Patient updatePatient(Patient patientRequest) {
         Patient existingPatient = patientRepository.findById(patientRequest.getId()).get();
 
-        existingPatient.setNom(patientRequest.getNom());
-        existingPatient.setPrenom(patientRequest.getPrenom());
-        existingPatient.setDate_de_naissance(patientRequest.getDate_de_naissance());
+        existingPatient.setLastname(patientRequest.getLastname());
+        existingPatient.setFirstname(patientRequest.getFirstname());
+        existingPatient.setDate_of_birth(patientRequest.getDate_of_birth());
         existingPatient.setGenre(patientRequest.getGenre());
-        existingPatient.setAdresse(patientRequest.getAdresse());
-        existingPatient.setTelephone(patientRequest.getTelephone());
+        existingPatient.setAddress(patientRequest.getAddress());
+        existingPatient.setPhone(patientRequest.getPhone());
 
-        return  patientRepository.save(existingPatient);
+        return patientRepository.save(existingPatient);
     }
 
-    public  String deletePatient(String patientId){
-        patientRepository.deleteById(patientId);
-        return patientId+" patient deleted from table";
+    public void deletePatient(Patient patient) {
+        patientRepository.delete(patient);
+    }
+
+
+    public  String statusPatient(Integer idPa){
+        Integer existingPatient = patientRepository.findById(idPa).get().getId();
+        return noteClient.statusNotePatient(existingPatient);
+    }
+
+   public NoteDTO addNotePatient(NoteDTO noteDTO,Integer idPatient,String patient){
+        Integer existingPatient = patientRepository.findById(idPatient).get().getId();
+        Optional<Patient> patient1 = patientRepository.findByLastname(patient);
+        String lastname = patient1.get().getLastname();
+        return noteClient.createNote(noteDTO, String.valueOf(existingPatient),lastname);
+
     }
 }

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+	<meta charset="utf-8" />
+	<title>Application Pay My Buddy</title>
+
+	<link rel="stylesheet"
+		  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+		  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+		  crossorigin="anonymous">
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+
+	<div class="row">
+		<h2>Update Patient</h2>
+	</div>
+
+	<div class="row">
+		<form action="#" th:action="@{/patient/update/{id}(id=${patient.id})}" th:object="${patient}" method="post" class="form-horizontal" style="width: 100%">
+			<div class="form-group">
+				<label for="lastname" class="col-sm-2 control-label">Username</label>
+				<div class="col-sm-10">
+					<input type="text" th:field="*{lastname}" id="lastname" placeholder="lastname" class="col-4" required>
+					<p class="text-danger" th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="firstname" class="col-sm-2 control-label">Firstname</label>
+				<div class="col-sm-10">
+					<input type="text" th:field="*{firstname}" id="firstname" placeholder="firstname" class="col-4" required>
+					<p class="text-danger" th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}"></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="date_of_birth" class="col-sm-2 control-label">Date_of_birth</label>
+				<div class="col-sm-10">
+					<input type="text" th:field="*{date_of_birth}" id="date_of_birth" placeholder="date_of_birth" class="col-4" required>
+					<p class="text-danger" th:if="${#fields.hasErrors('date_of_birth')}" th:errors="*{date_of_birth}"></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="genre" class="col-sm-2 control-label">Genre</label>
+				<div class="col-sm-10">
+					<input type="text" th:field="*{genre}" id="genre" placeholder="genre" class="col-4" required>
+					<p class="text-danger" th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}"></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="address" class="col-sm-2 control-label">Address</label>
+				<div class="col-sm-10">
+					<input type="text" th:field="*{address}" id="address" placeholder="address" class="col-4" required>
+					<p class="text-danger" th:if="${#fields.hasErrors('address')}" th:errors="*{genre}"></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="phone" class="col-sm-2 control-label">Phone</label>
+				<div class="col-sm-10">
+					<input type="text" th:field="*{phone}" id="phone" placeholder="phone" class="col-4" required>
+					<p class="text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></p>
+				</div>
+			</div>
+
+
+			<div class="form-group">
+				<div class="col-sm-12">
+					<input type="hidden" th:field="*{id}">
+					<a class="btn btn-danger btn-sm" href="/patient/list">Cancel</a>
+					<input class="btn btn-primary btn-sm" type="submit" value="Update Patient">
+				</div>
+			</div>
+		</form>
+	</div>
+
+</div>
+</body>
+</html>

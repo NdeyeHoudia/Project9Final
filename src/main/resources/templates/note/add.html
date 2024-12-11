@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+	<meta charset="utf-8" />
+	<title>Application Pay My Buddy</title>
+
+	<link rel="stylesheet"
+		  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+		  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+		  crossorigin="anonymous">
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+	<div class ="container">
+
+		<h3 class="text-left">Add New Note</h3>
+		<div th:object="${patient}">
+			<p>
+				<span id="lastname" th:text="*{lastname}"></span>
+				<span id="firstname" th:text="*{firstname}"></span>
+			</p>
+		</div>
+		<form action="#" th:action="@{/patient/history/{id}(id=${patient.id})}" th:object="${noteDTO}" method="post" class="form-horizontal" style="width: 100%">
+			<fieldset>
+				<legend></legend>
+				<br><br>
+				<div><textarea th:field="*{note}" id="note" name="message" rows="10" cols="33" placeholder="Enter note"></textarea></div>
+
+			</fieldset>
+			<div class="form-group">
+				<div class="col-sm-12">
+					<a class="btn btn-danger btn-sm" th:href="@{/patient/history/{id}(id=${patient.id})}">Cancel</a>
+					<input class="btn btn-primary btn-sm" type="submit" value="Add Note">
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+</body>
+</html>

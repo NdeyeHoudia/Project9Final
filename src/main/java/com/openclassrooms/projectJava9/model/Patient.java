@@ -1,26 +1,27 @@
 package com.openclassrooms.projectJava9.model;
 
+
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collation = "patients")
+@Entity
 public class Patient {
 
     @Id
-    private String id;
-    //@Indexed(unique = true)
-    private String nom;
-    private  String prenom;
-    private Date date_de_naissance;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    private String lastname;
+    private String firstname;
+    private String date_of_birth;
     private String genre;
-    private String adresse;
-    private String telephone;
+    private String address;
+    private String phone;
+
 }
