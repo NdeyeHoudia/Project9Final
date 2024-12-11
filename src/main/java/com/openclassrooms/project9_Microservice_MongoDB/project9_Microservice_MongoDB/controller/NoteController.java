@@ -17,15 +17,6 @@ public class NoteController {
     @Autowired
     private NoteService noteService;
 
-   /* String url = "http://localhost:8084/patients/all";
-    RestTemplate restTemplate = new RestTemplate();
-    Object patients = restTemplate.getForObject(url, Object[].class);
-
-    @GetMapping("/listPatient")
-    public Object getPatient(){
-        return  patients;
-    }
-    */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Note createNote(@RequestBody Note note,
@@ -50,6 +41,5 @@ public class NoteController {
     public String deleteNote(@PathVariable String noteId){return noteService.deleteNote(noteId);}
     @GetMapping("/countKeyWord")
     public long wordKey(@RequestParam List<String> keywords){return noteService.countByNoteAndContentRegex22(keywords);}
-
 
 }
