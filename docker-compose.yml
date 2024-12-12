@@ -5,10 +5,10 @@ services:
     image: mongo:latest
     container_name: mongodb
     restart: unless-stopped
-    environment: # set required env variables to access mongo
+    environment:
       MONGO_INITDB_ROOT_USERNAME: ndeyehoudiasylla02
       MONGO_INITDB_ROOT_PASSWORD: CdW3Gf7T7AztEQ0z
     ports:
       - 27017:27017
-    volumes: # optional to preserve database after container is deleted.
+    volumes:
       - ./database-data:/data/db
