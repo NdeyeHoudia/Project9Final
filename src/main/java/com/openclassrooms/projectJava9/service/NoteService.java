@@ -28,26 +28,7 @@ public class NoteService {
                 noteDTOList.add(noteDTO);
             }
         }
-       // System.out.println("list note par ID"+noteDTOList);
         return noteDTOList;
-    }
-
-    public List<NoteDTO> addNoteDto(NoteDTO noteDTO){
-        List<NoteDTO> noteDTOS = new ArrayList<>();
-        List<NoteDTO> noteDTOList = getNoteDTOS();
-
-        noteDTOS.add(noteDTO);
-        System.out.println("list note par ID"+noteDTOS);
-
-        return noteDTOS;
-
-      /*  noteDTOList.forEach(noteDTO1 -> {
-            noteDTO.setNote(noteDTO1.getNote());
-            noteDTO.setPatient(noteDTO1.getPatient());
-            noteDTO.setIdPatient(noteDTO1.getIdPatient());
-            noteDTOS.add(noteDTO);
-        });*/
-//        noteDTOList.addAll(noteDTOS);
     }
 
 }
