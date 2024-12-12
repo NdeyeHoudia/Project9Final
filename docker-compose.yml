@@ -7,8 +7,9 @@ networks:
     name: spring-boot-mysql-network
 services:
   mysqldb:
-    image: mysql:lts
-    command: --mysql-native-password=ON
+    image: mysql:latest
+    #command: --mysql-native-password=ON
+    restart: always
     ports:
       - "3308:3306"
     environment:
@@ -34,7 +35,7 @@ services:
         condition: service_healthy
     environment:
       - SPRING_PROFILES_ACTIVE=dev
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysqldb:3306/users-db?serverTimezone=UTC
+      - SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/users-db?serverTimezone=UTC
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=SD21048787@@
     networks:

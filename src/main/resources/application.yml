@@ -2,7 +2,7 @@ spring:
   application:
     name: patient-service
   datasource:
-    url: jdbc:mysql://localhost:3306/users-db
+    url: jdbc:mysql://localhost:3306/users-db?serverTimezone=UTC
     username: root
     password: SD21048787@@
     driver-class-name: com.mysql.cj.jdbc.Driver
