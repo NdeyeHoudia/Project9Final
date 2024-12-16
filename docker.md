@@ -1,4 +1,4 @@
-#### Démarrer les services dans un fichier docker-compose.yml
+##### Démarrer les services dans un fichier docker-compose.yml
 utilisation des arguments -d et -p lors du démarrage d'un conteneur ;
 
 docker-compose up -d
@@ -12,7 +12,7 @@ récupération d'une image depuis une registry avec la commande docker pull ;
 
 nettoyage du système avec  docker system prune
 
-#### Pour créer une image Docker, vous savez utiliser les instructions suivantes :
+##### Pour créer une image Docker, vous savez utiliser les instructions suivantes :
 
 FROM qui vous permet de définir l'image source ;
 
@@ -29,7 +29,7 @@ VOLUME qui permet de définir les volumes utilisables ;
 CMD qui permet de définir la commande par défaut lors de l’exécution de vos
 
 
-#### les commandes principales pour utiliser une stack Docker Compose. Voici les commandes les plus importantes :
+##### les commandes principales pour utiliser une stack Docker Compose. Voici les commandes les plus importantes :
 docker-compose up -d vous permettra de démarrer l'ensemble des conteneurs en arrière-plan ;
 
 docker-compose ps vous permettra de voir le statut de l'ensemble de votre stack ;
