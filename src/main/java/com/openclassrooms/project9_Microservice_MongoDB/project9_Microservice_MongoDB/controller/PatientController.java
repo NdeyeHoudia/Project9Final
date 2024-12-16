@@ -26,27 +26,6 @@ public class PatientController {
         return patientService.countKeywordOccurrences(id, keywords);
     }
 
-    @GetMapping("/age-patient")
-    public int agePatient(@RequestParam String birthdate) {return patientService.agePatient(birthdate);
-    }
-
-    @GetMapping("/id-patient")
-    public PatientDTO getPatientDTO(@RequestParam String birthdate) {
-        return patientService.getPatientById(birthdate);
-    }
-
-    @GetMapping("/listPatient")
-    public List<PatientDTO> getAllPatient() {
-        return patientService.getPatientDTOS();
-    }
-
-    @GetMapping("/{id}/status")
-    public String statusNotePatient(
-            @PathVariable Integer id
-    ) {
-        return patientService.statusNotePatient(id);
-    }
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Note createNote(@RequestBody Note note,
@@ -54,4 +33,5 @@ public class PatientController {
                            @RequestParam String patient){
         return noteService.saveNote(note,patientId,patient);
     }
+
 }

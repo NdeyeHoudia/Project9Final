@@ -18,9 +18,6 @@ public class NoteService {
 
     @Autowired
     private NoteRepository noteRepository;
-    String url = "http://localhost:8084/patients/all";
-    RestTemplate restTemplate = new RestTemplate();
-    Object patients = restTemplate.getForObject(url, Object[].class);
 
     // CRUD CREATE READ UPDATE DELETE
     public Note addNote(Note note) {
@@ -58,9 +55,4 @@ public class NoteService {
         String regex = String.join("|", keywords);
        return noteRepository.countByPatientIdAndContentRegex2(regex);
     }
-
-    // Compter les occurrences des mots-clés dans toutes les notes du patient
-
-
-
 }
