@@ -6,7 +6,7 @@ import com.openclassrooms.geteway_service.model.AppRole;
 import com.openclassrooms.geteway_service.model.AppUser;
 
 import java.util.List;
-/*
+
 public interface AccountService {
     AppUser addNewUser(AppUser user);
     AppRole addNewRole(AppRole role);
@@ -16,4 +16,3 @@ public interface AccountService {
     AppUser loadUserByUsername(String username);
     List<AppUser> listUsers();
 }
-*/

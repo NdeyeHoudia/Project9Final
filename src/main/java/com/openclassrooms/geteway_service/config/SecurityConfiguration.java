@@ -1,11 +1,21 @@
 package com.openclassrooms.geteway_service.config;
 
+import com.openclassrooms.geteway_service.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-
-/*@Configuration
+@Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
 
@@ -20,7 +30,7 @@ public class SecurityConfiguration {
      * PasswordEncoder is Spring Security's interface for encoding and comparing passwords
      * @return an object BCryptPasswordEncoder
      */
-    /*@Bean
+    @Bean
     public static PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
@@ -33,7 +43,7 @@ public class SecurityConfiguration {
      * @return  an object Authentication
      * @throws Exception
      */
-   /* @Bean
+    @Bean
     public AuthenticationManager authenticationManager(HttpSecurity httpSecurity, BCryptPasswordEncoder encoder) throws Exception {
         AuthenticationManagerBuilder managerBuilder = httpSecurity.getSharedObject(AuthenticationManagerBuilder.class);
         managerBuilder.userDetailsService(userDetailsService).passwordEncoder(encoder);
@@ -48,7 +58,7 @@ public class SecurityConfiguration {
      * @return
      * @throws Exception
      */
-   /* @Bean
+    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         return http.authorizeHttpRequests(authorizationManagerRequestMatcherRegistry ->
@@ -83,4 +93,4 @@ public class SecurityConfiguration {
                     }
                 });
     }*/
-//}
+}
