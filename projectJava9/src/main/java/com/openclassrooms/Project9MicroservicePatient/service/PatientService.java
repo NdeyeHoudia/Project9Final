@@ -6,6 +6,9 @@ import com.openclassrooms.Project9MicroservicePatient.repository.PatientReposito
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -44,5 +47,18 @@ public class PatientService {
     public  String deletePatient(Integer patientId){
         patientRepository.deleteById(patientId);
         return patientId+" patient deleted from table";
+    }
+
+    public int agePatient(Integer id) {
+
+        LocalDate dateNaissance = LocalDate.parse(getPatientById(id).getDate_of_birth(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        return Period.between(dateNaissance, LocalDate.now()).getYears();
+    }
+
+    public String genrePatient(Integer id) {
+        Patient patientById = getPatientById(id);
+        if (patientById != null) {
+            return patientById.getGenre();
+        } else return "le patient non retrouvé pour" + id;
     }
 }

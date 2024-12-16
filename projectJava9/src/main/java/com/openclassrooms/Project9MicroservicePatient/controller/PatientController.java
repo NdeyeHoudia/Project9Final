@@ -29,4 +29,14 @@ public class PatientController {
     public Patient updatePatient(@RequestBody Patient patient){return patientService.updatePatient(patient);}
     @DeleteMapping("/{id}")
     public String deletePatient(@PathVariable Integer id){return patientService.deletePatient(id);}
+
+    @GetMapping("/{id}/agePatient")
+    public int agePatient(@PathVariable Integer id){
+        return patientService.agePatient(id);
+    }
+
+    @GetMapping("/{id}/genre")
+    public String genrePatient(@PathVariable Integer id){
+        return patientService.genrePatient(id);
+    }
 }
