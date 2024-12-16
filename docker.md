@@ -1,16 +1,15 @@
 ##### Démarrer les services dans un fichier docker-compose.yml
-utilisation des arguments -d et -p lors du démarrage d'un conteneur ;
-
-docker-compose up -d
-Arrêter et supprimer les services et leurs volumes
-
-docker-compose down -v
-
-démarrage d'un conteneur avec un docker run ;
-
-récupération d'une image depuis une registry avec la commande docker pull ;
-
-nettoyage du système avec  docker system prune
+    utilisation des arguments -d et -p lors du démarrage d'un conteneur ;
+    docker-compose up -d
+    Arrêter et supprimer les services et leurs volumes
+    
+    docker-compose down -v
+    
+    démarrage d'un conteneur avec un docker run ;
+    
+    récupération d'une image depuis une registry avec la commande docker pull ;
+    
+    nettoyage du système avec  docker system prune
 
 ##### Pour créer une image Docker, vous savez utiliser les instructions suivantes :
 
