@@ -16,13 +16,13 @@
 	<div class ="container">
 
 		<h3 class="text-left">Add New Note</h3>
-		<div th:object="${patient}">
+		<div th:object="${patientDTO}">
 			<p>
 				<span id="lastname" th:text="*{lastname}"></span>
 				<span id="firstname" th:text="*{firstname}"></span>
 			</p>
 		</div>
-		<form action="#" th:action="@{/patient/history/{id}(id=${patient.id})}" th:object="${noteDTO}" method="post" class="form-horizontal" style="width: 100%">
+		<form action="#" th:action="@{/patient/history/{id}(id=${patientDTO.id})}" th:object="${noteDTO}" method="post" class="form-horizontal" style="width: 100%">
 			<fieldset>
 				<legend></legend>
 				<br><br>
@@ -31,7 +31,7 @@
 			</fieldset>
 			<div class="form-group">
 				<div class="col-sm-12">
-					<a class="btn btn-danger btn-sm" th:href="@{/patient/history/{id}(id=${patient.id})}">Cancel</a>
+					<a class="btn btn-danger btn-sm" th:href="@{/patient/history/{id}(id=${patientDTO.id})}">Cancel</a>
 					<input class="btn btn-primary btn-sm" type="submit" value="Add Note">
 				</div>
 			</div>

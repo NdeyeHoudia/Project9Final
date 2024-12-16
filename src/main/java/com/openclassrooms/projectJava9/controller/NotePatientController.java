@@ -2,6 +2,7 @@ package com.openclassrooms.projectJava9.controller;
 
 import com.openclassrooms.projectJava9.model.NoteDTO;
 import com.openclassrooms.projectJava9.model.Patient;
+import com.openclassrooms.projectJava9.model.PatientDTO;
 import com.openclassrooms.projectJava9.service.NoteService;
 import com.openclassrooms.projectJava9.service.PatientService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -30,10 +31,10 @@ public class NotePatientController {
     @GetMapping("/note/add/{id}")
     public String addNotePatientForm(@PathVariable("id") Integer id,NoteDTO noteDTO, Model model) {
         List<NoteDTO> notes = noteService.getNoteDTOS();
-        Patient patient = patientService.getPatientById(id);
+        PatientDTO patientDTO = patientService.getPatientId(id);
 
 
-        model.addAttribute("patient", patient);
+        model.addAttribute("patientDTO", patientDTO);
         model.addAttribute("notes", notes);
 
         return "note/add";

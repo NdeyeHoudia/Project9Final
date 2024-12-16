@@ -16,9 +16,9 @@
 
 	<div class="row">
 
-		<form action="#" th:action="@{/patient/history/{id}(id=${patient.id})}" th:object="${patient}" method="post" class="form-horizontal" style="width: 100%">
+		<form action="#" th:action="@{/patient/history/{id}(id=${patientDTO.id})}" th:object="${patientDTO}" method="post" class="form-horizontal" style="width: 100%">
 			<h2>History Patient</h2>
-			<div th:object="${patient}">
+			<div th:object="${patientDTO}">
 				<h3 class="text-center">
 					<span id="lastname" th:text="*{lastname}"></span>
 					<span id="date_of_birth" th:text="*{date_of_birth}"></span>
@@ -38,13 +38,15 @@
 			</table>
 		</form>
 		<div>
-			<h3 class="text-center"><span style="width: 35%; background-color: #8FBC8F;" class="text-center" th:text="${status}"></span></h3>
+		<!--	<h3 class="text-center"><span style="width: 35%; background-color: #8FBC8F;" class="text-center" th:text="${status}"></span></h3>-->
+			<h3 class="text-center"><span style="width: 35%; background-color: #8FBC8F;" class="text-center" th:text="${risque}"></span></h3>
+
 		</div>
 
 		<div class="form-group">
 			<div class="col-sm-12">
 				<a class="btn btn-danger btn-sm" href="/patient/list">Cancel</a>
-				<a class="btn btn-primary btn-sm" th:href="@{/note/add/{id}(id=${patient.id})}">Add Note</a>&nbsp;
+				<a class="btn btn-primary btn-sm" th:href="@{/note/add/{id}(id=${patientDTO.id})}">Add Note</a>&nbsp;
 				<a class="btn btn-primary btn-sm" href="/note/note">List Note</a>
 			</div>
 		</div>

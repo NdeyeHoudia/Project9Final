@@ -2,6 +2,7 @@ package com.openclassrooms.projectJava9.controller;
 
 import com.openclassrooms.projectJava9.model.NoteDTO;
 import com.openclassrooms.projectJava9.model.Patient;
+import com.openclassrooms.projectJava9.model.PatientDTO;
 import com.openclassrooms.projectJava9.service.NoteClient;
 import com.openclassrooms.projectJava9.service.NoteService;
 import com.openclassrooms.projectJava9.service.PatientService;
@@ -30,48 +31,48 @@ public class PatientController {
     public String home(Model model, HttpServletRequest request)
     {
         model.addAttribute("remoteUser", request.getRemoteUser());
-        model.addAttribute("patients", patientService.findAllPatient());
+        model.addAttribute("patients", patientService.getAllPatient());
         return "patient/list";
     }
 
     @GetMapping("/patient/add")
-    public String addPatientForm(Patient patient) {
+    public String addPatientForm(PatientDTO patientDTO) {
         return "patient/add";
     }
 
     @PostMapping("/patient/validate")
-    public String validate(@Validated Patient patient,
+    public String validate(@Validated PatientDTO patientDTO,
                            BindingResult result, Model model) {
 
         if(result.hasErrors()){
             return "patient/add";
         }
 
-       patientService.addPatient(patient);
-        model.addAttribute("patients", patientService.findAllPatient());
+       patientService.addPatientDTO(patientDTO);
+        model.addAttribute("patients", patientService.getAllPatient());
         return "patient/list";
     }
 
     @GetMapping("/patient/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
 
-        Patient patient = patientService.getPatientById(id);
-        model.addAttribute("patient", patient);
+        PatientDTO patientDTO = patientService.getPatientId(id);
+        model.addAttribute("patientDTO", patientDTO);
         return "patient/update";
     }
 
     @PostMapping("/patient/update/{id}")
     public String updatePatient(@PathVariable("id") Integer id,
-                                @Validated Patient patient,
+                                @Validated PatientDTO patientDTO,
                                 BindingResult result, Model model) {
 
         if (result.hasErrors()) {
             return "patient/update";
         }
-        patient.setId(id);
+        patientDTO.setId(id);
       //  patientService.addPatient(patient);
-        patientService.updatePatient(patient);
-        model.addAttribute("patients", patientService.findAllPatient());
+        patientService.updatePatientDTO(patientDTO);
+        model.addAttribute("patients", patientService.getAllPatient());
         return "redirect:/patient/list";
     }
 
@@ -79,9 +80,9 @@ public class PatientController {
     @GetMapping("/patient/delete/{id}")
     public String deletePatient(@PathVariable("id") Integer id, Model model) {
 
-        Patient patient = patientService.getPatientById(id);
-        patientService.deletePatient(patient);
-        model.addAttribute("patients", patientService.findAllPatient());
+        PatientDTO patientDTO = patientService.getPatientId(id);
+        patientService.deletePatient(id);
+        model.addAttribute("patients", patientService.getAllPatient());
         return "redirect:/patient/list";
     }
 
@@ -91,15 +92,16 @@ public class PatientController {
                                 @Validated NoteDTO noteDTO)
     {
 
-        Patient patient = patientService.getPatientById(id);
+        PatientDTO patientDTO = patientService.getPatientId(id);
         List<NoteDTO> noteDTOS = noteService.listNoteById(String.valueOf(id));
-      //  List<NoteDTO> listNoteByiD = noteService.addNoteDto(noteDTO);
+      //  String status= patientService.statusPatient(id);
 
-        String status= patientService.statusPatient(id);
+        String risque = patientService.risquePatient(id);
 
-        model.addAttribute("patient", patient);
+        model.addAttribute("patientDTO", patientDTO);
         model.addAttribute("noteDTOS", noteDTOS);
-         model.addAttribute("status", status);
+        model.addAttribute("risque", risque);
+
 
         return "patient/history";
     }
@@ -112,17 +114,16 @@ public class PatientController {
         if(result.hasErrors()){
             return "note/add";
         }
-        Patient patient = patientService.getPatientById(id);
-        model.addAttribute("patient", patient);
+        PatientDTO patientDTO = patientService.getPatientId(id);
+        model.addAttribute("patientDTO", patientDTO);
 
-        patientService.addNotePatient(noteDTO,id,patient.getLastname());
+        patientService.addNotePatient(noteDTO,id,patientDTO.getLastname());
 
-        String status= patientService.statusPatient(id);
+        String risque = patientService.risquePatient(id);
         List<NoteDTO> noteDTOS = noteService.listNoteById(String.valueOf(id));
 
         model.addAttribute("noteDTOS", noteDTOS);
-        model.addAttribute("status", status);
-
+        model.addAttribute("risque", risque);
 
         return "patient/history";
     }
