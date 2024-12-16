@@ -1,4 +1,7 @@
 # Installez Docker sur votre système. Vous pouvez le télécharger depuis docker.com.
+Dans mon cas, j'ai installer docker sur mon pc
+## Docker Desktop pour Windows - x86_64 
+(https://docs.docker.com/desktop/setup/install/windows-install/)
 Une fois l’installation terminée, vérifiez la version de Docker pour vous assurer que tout fonctionne correctement en exécutant 
 ## docker --version 
 dans votre terminal.
