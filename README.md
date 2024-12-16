@@ -2,12 +2,12 @@
 ### Développez une solution en microservices pour votre client
 
   ##### Structurer l'appilcation en cinq microservices qui interagissent avec un service gateway
-    --- 2 microservices backend avec une base de données mysql et une base de données mongodb
-    --- 1 microservices frontend
-    ---**1 microservices pour la gestion des risque du patient**
-    ---**1 microservices pour le gateway**
-    --  faire du green code
-    --  créer des images docker 
+    ---   2 microservices backend avec une base de données mysql et une base de données mongodb
+    ---   1 microservices frontend
+    ---   1 microservices pour la gestion des risque du patient
+    ---   1 microservices pour le gateway
+    ---   faire du green code
+    ---   créer des images docker 
 
     # Installez Docker sur votre système. Vous pouvez le télécharger depuis docker.com.
 Dans mon cas, j'ai installer docker sur mon pc
