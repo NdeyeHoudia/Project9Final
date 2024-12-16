@@ -40,7 +40,7 @@ Dans ce projet, on a besoin de deux image de base de données (MYSQL et MONGODB)
     image: mysql:lts
 ##### Exemple de docker-compose avec l'image mongo
     version: "3"
-**services:
+    services:
      mongo:
        image: mongo:latest
       environment:
@@ -49,7 +49,7 @@ Dans ce projet, on a besoin de deux image de base de données (MYSQL et MONGODB)
     volumes:
       - /data/db:/data/db
     ports:
-      - 27017:27017**
+      - 27017:27017
 
 
 Démarrer les services dans un fichier docker-compose.yml
