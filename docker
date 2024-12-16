@@ -1,0 +1,6 @@
+Démarrer les services dans un fichier docker-compose.yml
+
+docker-compose up -d
+Arrêter et supprimer les services et leurs volumes
+
+docker-compose down -v
