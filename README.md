@@ -24,10 +24,10 @@ Créez un fichier Docker et suivez les instructions pour créer votre image Dock
 Exécutez la commande docker build qui construira une image docker
 ##### Maintenant que l’image Docker est prête à être utilisée, utilisez la commande docker run pour créer des conteneurs
 
-### FROM: Spécifiez l’image de base à utiliser.
-### RUN: Ajoute des commandes qui seront exécutées dans votre conteneur.
-### COPY ou ADD: Permet de copier des fichiers de votre système de fichiers local vers l’image
-### CMD: Indique la commande à exécuter lorsque le conteneur démarre.
+FROM: Spécifiez l’image de base à utiliser.
+RUN: Ajoute des commandes qui seront exécutées dans votre conteneur.
+COPY ou ADD: Permet de copier des fichiers de votre système de fichiers local vers l’image
+CMD: Indique la commande à exécuter lorsque le conteneur démarre.
 
 Ces commandes forment la base de votre Dockerfile, mais il y a beaucoup plus à explorer pour optimiser et sécuriser vos images Docker.
 
