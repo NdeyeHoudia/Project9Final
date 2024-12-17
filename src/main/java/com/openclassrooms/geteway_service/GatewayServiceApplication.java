@@ -2,7 +2,6 @@ package com.openclassrooms.geteway_service;
 
 import com.openclassrooms.geteway_service.model.AppRole;
 import com.openclassrooms.geteway_service.model.AppUser;
-import com.openclassrooms.geteway_service.service.AccountService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,7 +18,7 @@ public class GatewayServiceApplication {
 		SpringApplication.run(GatewayServiceApplication.class, args);
 	}
 
-
+/*
 @Bean
 CommandLineRunner start(AccountService accountService){
 		return  args -> {
@@ -44,8 +43,6 @@ CommandLineRunner start(AccountService accountService){
 			accountService.addRoleToUser("user4","USER");
 			accountService.addRoleToUser("user4","PRODUCT_MANAGER");
 
-
-
 		};
-}
+}*/
 }
